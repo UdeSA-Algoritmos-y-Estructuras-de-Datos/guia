@@ -15,11 +15,11 @@ jobs:
           post_compile: "latexmk -c"
           latexmk_shell_escape: true
       - run: |
-          mkdir guia/build
-          cp guia/guia.pdf guia/build/guia.pdf
+          mkdir build
+          cp guia.pdf build/guia.pdf
       - name: Deployar guía 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           BRANCH: guia-pdf
-          FOLDER: guia/build
+          FOLDER: build
           SSH: true
