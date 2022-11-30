@@ -20,6 +20,5 @@ jobs:
       - name: Deployar guía 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          BRANCH: guia-pdf
-          FOLDER: build
-          SSH: true
+          branch: guia-pdf
+          folder: build
