@@ -13,6 +13,7 @@ jobs:
         with:
           root_file: guia.tex
           post_compile: "latexmk -c"
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -shell-escape
       - run: |
           mkdir guia/build
           cp guia/guia.pdf guia/build/guia.pdf
