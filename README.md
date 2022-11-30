@@ -1,1 +1,1 @@
-# guia
+# Guía práctica
