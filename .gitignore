@@ -9,6 +9,7 @@ _minted-guia/
 *.bbl
 *.blg
 *.run.xml
+*.toc
 
 *.zip
 *.pdf
