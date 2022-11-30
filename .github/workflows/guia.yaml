@@ -2,7 +2,7 @@ name: Compilar guía práctica
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   build_latex:
     runs-on: ubuntu-latest
