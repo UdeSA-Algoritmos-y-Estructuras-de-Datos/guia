@@ -157,7 +157,7 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
     \end{enumerate}
 
     % Ejercicios de searching and sorting
-    \section{Búsqueda y Ordenamiento}
+    \section{Ordenamiento}
 
     \item\mint{c}|void ordenar(int* arr, int size)|
     Dado un arreglo de enteros $arr$ de tamaño $size$, escribir una función que lo ordene de menor a mayor.
@@ -174,7 +174,7 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
 
     \item Decimos que un algoritmo de ordenamiento es \textbf{estable} si preserva el orden relativo de los elementos con la misma clave. \newline
     
-    Supongamos que queremos ordenar el arreglo de tuplas A = [(3,6), (1,5), (3,2)], utilizando como clave el primer componente de cada tupla. En este caso, dos resultados diferentes son posibles, uno de los cuales mantiene un orden relativo de elementos con claves iguales, y una en la que no: \newline
+    Supongamos que queremos ordenar el arreglo de tuplas A = [(3,6), (1,5), (3,2)], utilizando como clave el primer componente de cada tupla. En este caso, dos resultados diferentes son posibles, uno de los cuales mantiene un orden relativo de elementos con claves iguales, y una en la que no:
 
     [(1,5), (3,6), (3,2)] \textcolor{green}{Preserva el orden relativo entre (3,6) y (3,2)}
 
@@ -207,33 +207,12 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
         \item ¿Cuántas veces se ejecuta el swap del ciclo interior como máximo (i.e. en el peor caso)?
     \end{enumerate}
 
-
-
-
-
-    \item\mint{c}|int buscar(int* arr, int size, int target)|
-    Dado un arreglo de enteros $arr$ de tamaño $size$ y un entero $target$,
-    escribir una función que busque al $target$ en $arr$. Si existe, entonces devolver su índice. En caso contrario, devolver -1. \newline Por ejemplo, dado el arreglo [8,4,9,1] y el target 9, se debe devolver 2. En cambio, si el target es 10, se debe devolver -1.
-
-    \item Repetir el ejercicio anterior, pero ahora suponiendo que $arr$ está ordenado. El algoritmo debe tener complejidad $O(log{}n)$.
-
-    \item\mint{c}|bool existe(int* arr, int size, int target)|
+    \item\mint{c}|bool twoSum(int* arr, int size, int target)|
     Dado un arreglo de enteros sin repetidos $arr$ de tamaño $size$, se debe devolver true si existen dos elementos $a1$ y $a2$ tal que $a1 + a2 = target$. En caso contrario, devolver false.
     \begin{enumerate}
         \item Dar una solución con complejidad temporal $O(n^2)$.
         \item Dar una solución con complejidad temporal $O(n logn)$. \newline\textit{Sugerencia: Ordenar el arreglo.}
     \end{enumerate}
-
-    \item\mint{c}|int* buscarRango(int* arr, int size, int target)|
-    Dado un arreglo de enteros $arr$ de tamaño $size$, ordenado de menor a mayor, encontrar los índices de comienzo y de final de $target$. Devolverlos en un arreglo. Además, se puede suponer que $target$ es un elemento de $arr$.
-    \newline
-    Por ejemplo, si arr = [5,7,7,8,8,8,10], target = 8, se debe devolver [3,5].
-    \begin{enumerate}
-        \item El algoritmo dado debe tener complejidad $O(n)$.
-        \item (Dificil) El algoritmo dado debe tener complejidad $O(log{}n)$.\newline
-        \textit{Sugerencia: Utilizar búsqueda binaria}
-    \end{enumerate}
-    
     
 \end{enumerate}
 
@@ -247,11 +226,65 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
         Los números de Fibonacci son una sucesión de números naturales definida por las ecuaciones:
         $$F_n = F_{n-1} + F_{n-2}$$ con $F_1 = F_2 = 1$. Dar una función recursiva para computar el n-ésimo número de Fibonacci.
 
-        \item Como vieron en la teórica, \textbf{Merge Sort} es el algoritmo recursivo más conocido para ordenar un arreglo. Utiliza una técnica algorítmica conocida como \textbf{Divide and Conquer}, y consta en dividir el arreglo en dos partes iguales, ordenar cada una recursivamente, y finalmente combinar los resultados.
+        \item Como vieron en la teórica, \textbf{merge sort} es el algoritmo recursivo más conocido para ordenar un arreglo. Utiliza una técnica algorítmica conocida como \textbf{Divide and Conquer}, y consta en dividir el arreglo en dos partes iguales, ordenar cada una recursivamente, y finalmente combinar los resultados.
         \begin{enumerate}
             \item Implementar merge sort utilizando pseudocódigo. Dar su complejidad temporal.
             \item ¿Que desventaja tiene merge sort al ser un algoritmo recursivo? \newline\textit{Sugerencia: Pensar en la complejidad espacial y el stack del proceso.}
         \end{enumerate}
+
+        \item La \textbf{búsqueda binaria} es un algoritmo eficiente para encontrar un elemento \textbf{en un arreglo ordenado}. El código es el siguiente: (Suponiendo que n es el tamaño del arreglo).
+
+            \begin{minted}{c}
+    bool binarySearch(int* a, int n, int target)
+    {
+        int low = 0, high = n - 1;
+        
+        // Iteramos hasta agotar los elementos
+        while (low <= high)
+        {
+            // Calculamos el punto medio del arreglo
+            int mid = (low + high)/2;
+            
+            // Encontramos el target
+            if (target == nums[mid]) {
+                return true;
+            }
+     
+            // Si el target es menor que el elemento del medio, 
+            // descartamos todos los elementos a la derecha.
+            else if (target < nums[mid]) {
+                high = mid - 1;
+            }
+     
+            // Si el target es mayor que el elemento del medio, 
+            // descartamos todos los elementos a la izquierda.
+            else {
+                low = mid + 1;
+            }
+        }
+ 
+    // Taget no está en el arreglo.
+    return false;
+
+    }
+    \end{minted} 
+
+    \begin{enumerate}
+        \item Describir con palabras qué hace este algoritmo.
+        \item Mostrar con un ejemplo que el algoritmo \textbf{no} es correcto si el arreglo de entrada no esta ordenado.
+        \item Implementar la búsqueda binaria utilizando recursión. Dar su complejidad temporal.
+    \end{enumerate}
+
+        
+    \item\mint{c}|int* buscarRango(int* arr, int size, int target)|
+    Dado un arreglo de enteros $arr$ de tamaño $size$, ordenado de menor a mayor, encontrar los índices de comienzo y de final de $target$. Devolverlos en un arreglo. Además, se puede suponer que $target$ es un elemento de $arr$.
+    \newline
+    Por ejemplo, si arr = [5,7,7,8,8,8,10], target = 8, se debe devolver [3,5].
+    \begin{enumerate}
+        \item El algoritmo dado debe tener complejidad $O(n)$.
+        \item (Dificil) El algoritmo dado debe tener complejidad $O(log{}n)$.\newline
+        \textit{Sugerencia: Utilizar búsqueda binaria}
+    \end{enumerate}
 
         
         
