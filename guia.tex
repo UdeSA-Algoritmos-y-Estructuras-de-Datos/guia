@@ -45,7 +45,7 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
 \begin{enumerate}
 
     %Ejercicios sin punteros
-    \section{Introductorios}
+    \section{Ejercicios para entrar en calor}
 
     \item Escribir la función que dado n $\in$ N devuelve si es primo. Recuerden que un número es primo si los únicos divisores que tiene son 1 y el mismo.
     
@@ -140,16 +140,41 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
     % Ejercicios de searching and sorting
     \section{Búsqueda y Ordenamiento}
 
-    \item Dado un arreglo de enteros $arr$, escribir una función que lo ordene de menor a mayor y dar su complejidad temporal.
+    \item\mint{c}|void ordenar(int* arr, int size)|
+    Dado un arreglo de enteros $arr$ de tamaño $size$, escribir una función que lo ordene de menor a mayor y dar su complejidad temporal.
     \begin{enumerate}
      \item Utilizando \textbf{\textit{selection sort}}.
      \item Utilizando \textbf{\textit{insertion sort}}. 
     \end{enumerate}
 
-    \item Dado un arreglo de enteros $arr$  y un entero $target$,
-    escribir una función que busque al $target$ en $arr$. Si existe, entonces devolver su índice. En caso contrario, devolver -1.
+    % Para que piensen en el invariante de los algoritmos. 
+    % Utilizar selection sort, ya que en la iteracion k-esima, tenes los k menores elementos
+    % del arreglo en las posiciones [0...k]
+    Suponiendo que queremos obtener únicamente los $k < size$ menores elementos del arreglo, ¿cuál de los dos algoritmos utilizaría? ¿Por qué?
+
+    \item\mint{c}|int buscar(int* arr, int size, int target)|
+    Dado un arreglo de enteros $arr$ de tamaño $size$ y un entero $target$,
+    escribir una función que busque al $target$ en $arr$. Si existe, entonces devolver su índice. En caso contrario, devolver -1. \newline Por ejemplo, dado el arreglo [8,4,9,1] y el target 9, se debe devolver 2. En cambio, si el target es 10, se debe devolver -1.
 
     \item Repetir el ejercicio anterior, pero ahora suponiendo que $arr$ está ordenado. El algoritmo debe tener complejidad $O(log{}n)$.
+
+    \item\mint{c}|bool existe(int* arr, int size, int target)|
+    Dado un arreglo de enteros sin repetidos $arr$ de tamaño $size$, se debe devolver true si existen dos elementos $a1$ y $a2$ tal que $a1 + a2 = target$. En caso contrario, devolver false.
+    \begin{enumerate}
+        \item Dar una solución con complejidad temporal $O(n^2)$.
+        \item Dar una solución con complejidad temporal $O(n logn)$. \newline\textit{Sugerencia: Ordenar el arreglo.}
+    \end{enumerate}
+
+    \item\mint{c}|int* existe(int* arr, int size, int target)|
+    Dado un arreglo de enteros $arr$ de tamaño $size$, ordenado de menor a mayor, encontrar los índices de comienzo y de final de $target$. Devolverlos en un arreglo. Además, se puede suponer que $target$ es un elemento de $arr$.
+    \newline
+    Por ejemplo, si arr = [5,7,7,8,8,8,10], target = 8, se debe devolver [3,5].
+    \begin{enumerate}
+        \item El algoritmo dado debe tener complejidad $O(n)$.
+        \item (Dificil) El algoritmo dado debe tener complejidad $O(log{}n)$.\newline
+        \textit{Sugerencia: Utilizar búsqueda binaria}
+    \end{enumerate}
+    
     
 \end{enumerate}
 
@@ -179,7 +204,7 @@ char* masGrande(Persona** personas, int n)
 
     Completar la función $masGrande$, que dado un arreglo de n personas, devuelve el nombre de la persona de mayor edad.
 
-    \item \mint{c}|void imprimirMatriz(int** matriz, int n, int m)|
+    \item \mint{c}|void imprimirMatriz(int** matrix, int n, int m)|
     Dada una matriz de $n$ filas y $m$ columnas, imprimir todos sus elementos en pantalla. Se deben imprimir todos los elementos de la primer fila, luego todos los de la segunda fila, y así sucesivamente. Por ejemplo, dada la matriz de $2x3$ [[1,2,3], [4,5,6]], se debe imprimir 1, 2, 3, 4, 5, 6.
     
     \item \mint{c}|void traspuesta(int** matrix, int n)|
