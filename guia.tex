@@ -160,16 +160,56 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
     \section{Búsqueda y Ordenamiento}
 
     \item\mint{c}|void ordenar(int* arr, int size)|
-    Dado un arreglo de enteros $arr$ de tamaño $size$, escribir una función que lo ordene de menor a mayor y dar su complejidad temporal.
+    Dado un arreglo de enteros $arr$ de tamaño $size$, escribir una función que lo ordene de menor a mayor.
     \begin{enumerate}
      \item Utilizando \textbf{\textit{selection sort}}.
      \item Utilizando \textbf{\textit{insertion sort}}. 
-    \end{enumerate}
-
-    % Para que piensen en el invariante de los algoritmos. 
+     \item Dar la complejidad temporal en el peor caso de ambos algoritmos.
+     \item Cual es la complejidad temporal en el peor caso de ambos algoritmos, suponiendo que el arreglo de entrada ya está ordenado?
+     % Para que piensen en el invariante de los algoritmos. 
     % Utilizar selection sort, ya que en la iteracion k-esima, tenes los k menores elementos
     % del arreglo en las posiciones [0...k]
-    Suponiendo que queremos obtener únicamente los $k < size$ menores elementos del arreglo, ¿cuál de los dos algoritmos utilizaría? ¿Por qué?
+     \item Suponiendo que queremos obtener únicamente los $k < size$ menores elementos del arreglo, ¿Cuál de los dos algoritmos utilizaría? ¿Por qué?
+    \end{enumerate}
+
+    \item Decimos que un algoritmo de ordenamiento es \textbf{estable} si preserva el orden relativo de los elementos con la misma clave. \newline
+    
+    Supongamos que queremos ordenar el arreglo de tuplas A = [(3,6), (1,5), (3,2)], utilizando como clave el primer componente de cada tupla. En este caso, dos resultados diferentes son posibles, uno de los cuales mantiene un orden relativo de elementos con claves iguales, y una en la que no: \newline
+
+    [(1,5), (3,6), (3,2)] \textcolor{green}{Preserva el orden relativo entre (3,6) y (3,2)}
+
+    [(1,5), (3,2), (3,6)] \textcolor{red}{No preserva el orden relativo entre (3,6) y (3,2)}
+
+    \begin{enumerate}
+        \item Decidir si los algoritmos de ordenamiento presentados en el ejercicio anterior son estables. Justificar.
+    \end{enumerate}
+
+    \item Consideremos el siguiente algoritmo de ordenamiento, llamado \textbf{bubble sort} (suponemos que n es el tamaño del arreglo):
+
+    \begin{minted}{c}
+    int i = 0;
+    while( i < n-1 )
+    {
+        int j = 0;
+        while( j < n-1 )
+        {
+            if( a[j] > a[j+1] )
+                swap(a, j, j+1);
+            j++;
+        }
+        
+        i++;
+    }
+    \end{minted} 
+
+    \begin{enumerate}
+        \item Describir con palabras qué hace este algoritmo.
+        \item ¿Cuántas veces se ejecuta el swap del ciclo interior como máximo (i.e. en el peor caso)?
+    \end{enumerate}
+
+
+
+
 
     \item\mint{c}|int buscar(int* arr, int size, int target)|
     Dado un arreglo de enteros $arr$ de tamaño $size$ y un entero $target$,
@@ -197,7 +237,8 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
     
 \end{enumerate}
 
-
+% TODO: Deberiamos hacerlos en pseudocodigo al estilo Python? Algunos ejercicios pueden ser
+% muy engorrosos de implementar. Ej: mergesort.
 \chapter{Recursividad}
 
     \begin{enumerate}
@@ -205,6 +246,12 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
         \item\mint{c}|int fibo(int n)|
         Los números de Fibonacci son una sucesión de números naturales definida por las ecuaciones:
         $$F_n = F_{n-1} + F_{n-2}$$ con $F_1 = F_2 = 1$. Dar una función recursiva para computar el n-ésimo número de Fibonacci.
+
+        \item Como vieron en la teórica, \textbf{Merge Sort} es el algoritmo recursivo más conocido para ordenar un arreglo. Utiliza una técnica algorítmica conocida como \textbf{Divide and Conquer}, y consta en dividir el arreglo en dos partes iguales, ordenar cada una recursivamente, y finalmente combinar los resultados.
+        \begin{enumerate}
+            \item Implementar merge sort utilizando pseudocódigo. Dar su complejidad temporal.
+            \item ¿Que desventaja tiene merge sort al ser un algoritmo recursivo? \newline\textit{Sugerencia: Pensar en la complejidad espacial y el stack del proceso.}
+        \end{enumerate}
 
         
         
