@@ -92,8 +92,8 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
         \item\mint{c}|void crearArreglo(int v)|
         Crea un arreglo estático de enteros de tamaño 8, inicializando todos sus elementos con $v$, y lo imprime en pantalla.
         
-        \item\mint{c}|int* crearArregloDinamico(int n)|
-        Dado un natural $n$, crea un arreglo dinámico de enteros de ese tamaño, lo inicializa con ceros, y devuelve un puntero al mismo.
+        \item\mint{c}|int* crearArregloDin(int n, int v)|
+        Dado un natural $n$, crea un arreglo de enteros de ese tamaño, inicializando todos sus elementos con $v$, y devuelve un puntero al mismo.
         
         \item Invocar la siguiente función con cualquiera de los arreglos inicializados anteriormente y convencerse de que sus elementos están ubicados de manera \textbf{contigua} en memoria. \textit{Recordar que cada elemento de tipo int ocupa $4$ bytes.}
         
@@ -105,11 +105,30 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
             printf("Elemento: %d, Direccion: %d\n", i, &arr[i]);
         }
     }
-    \end{minted}
+    \end{minted}    
+    
     \end{enumerate}
 
+    \item{Cuál es la diferencia entre {\textbf{malloc}} y {\textbf{calloc}}? Cuando utilizamos la función {\textbf{free}}?}
+
+    \item Dado el siguiente struct que representa una Persona
+    \begin{minted}{c}
+    typedef struct Persona{
+        int edad;
+        char* nombre;
+    } Persona;
+    \end{minted} 
+
+    \mint{c}|Persona* inicializarPersonas(int n)|
+    Completar la función inicializarPersonas, que dado un entero $n$, crea un arreglo de n personas, y devuelve un puntero al mismo. 
+    \begin{enumerate}
+        \item Utilizando \textbf{malloc}.
+        \item Utilizando \textbf{calloc}.
+    \end{enumerate}
+    
+
     % Ejercicios integradores con arreglos
-    \section{Más arreglos!}
+    \subsection{Más arreglos!}
 
     \item Programar las siguientes funciones en C:
     \begin{enumerate}
@@ -180,6 +199,17 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
 
 
 \chapter{Recursividad}
+
+    \begin{enumerate}
+    
+        \item\mint{c}|int fibo(int n)|
+        Los números de Fibonacci son una sucesión de números naturales definida por las ecuaciones:
+        $$F_n = F_{n-1} + F_{n-2}$$ con $F_1 = F_2 = 1$. Dar una función recursiva para computar el n-ésimo número de Fibonacci.
+
+        
+        
+    \end{enumerate}
+    
 
 \chapter{Lectura de Archivos}
 
