@@ -31,7 +31,7 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
 	\and
 	I. Javier Mermet
 	\and
-	Matía Sandacz
+	Matías Sandacz
 }
 \date{\today}
 
@@ -95,7 +95,7 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
         \item\mint{c}|int* crearArregloDinamico(int n)|
         Dado un natural $n$, crea un arreglo dinámico de enteros de ese tamaño, lo inicializa con ceros, y devuelve un puntero al mismo.
         
-        \item Invocar la siguiente función con cualquiera de los arreglos inicializados anteriormente y convencerse de que sus elementos están ubicados de manera \textbf{contigua} en memoria. \textit{Recordar que cada elemento de tipo int ocupa $4$ bytes}
+        \item Invocar la siguiente función con cualquiera de los arreglos inicializados anteriormente y convencerse de que sus elementos están ubicados de manera \textbf{contigua} en memoria. \textit{Recordar que cada elemento de tipo int ocupa $4$ bytes.}
         
     \begin{minted}{c}
     void mostrarMemoria(int* arr, int size)
@@ -116,11 +116,11 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
         \item\mint{c}|int maximo(int* arr, int size)|
         Dado un arreglo de enteros $arr$ de tamaño $size$, devuelve el máximo elemento.
 
-        \item\mint{c}|void sumador(int* arr, int c, int size)|
-        Suma $c$ a todos los elementos de $arr$.
+        \item\mint{c}|void sumador(int* arr, int size, int c)|
+        Dado un arreglo de enteros $arr$ de tamaño $size$, y un entero $c$, suma $c$ a todos los elementos de $arr$.
 
         \item\mint{c}|char* copiar(char* arr)|
-        Crea una copia de $arr$.
+        Crea una copia de $arr$, y devuelve un puntero a la copia.
         
         \item\mint{c}|int* reverso(int* arr, int size)|
         Dado un arreglo de enteros $arr$ de tamaño $size$, devuelve su reverso. \newline
@@ -134,7 +134,7 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
         Dado un arreglo $arr$ de enteros de tamaño $size$, retorna true si es monótonamente creciente o monótonamente decreciente.
 
         \item\mint{c}|bool esPalindromo(char* s)|
-        Dado un String $s$, retorna true si es un palíndromo. \textit{Recuerden que un palíndromo es una palabra que se lee igual en un sentido que en otro (por ejemplo; Ana, Anna, Otto).}
+        Dado un string $s$, retorna true si es un palíndromo. \textit{Recuerden que un palíndromo es una palabra que se lee igual en un sentido que en otro (por ejemplo; Ana, Anna, Otto).}
     \end{enumerate}
 
     % Ejercicios de searching and sorting
@@ -150,8 +150,7 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
     escribir una función que busque al $target$ en $arr$. Si existe, entonces devolver su índice. En caso contrario, devolver -1.
 
     \item Repetir el ejercicio anterior, pero ahora suponiendo que $arr$ está ordenado. El algoritmo debe tener complejidad $O(log{}n)$.
-
-
+    
 \end{enumerate}
 
 
@@ -159,7 +158,35 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
 
 \chapter{Lectura de Archivos}
 
+% Algunos ejercicios con punteros dobles
 \chapter{Magia con Punteros}
+
+\begin{enumerate}
+
+    \item\begin{minted}{c}
+typedef struct Persona {
+    char* nombre;
+    char* apellido;
+    char* domicilio;
+    int edad;
+} Persona;
+
+char* masGrande(Persona** personas, int n)
+{
+    // COMPLETAR
+}
+    \end{minted}
+
+    Completar la función $masGrande$, que dado un arreglo de n personas, devuelve el nombre de la persona de mayor edad.
+
+    \item \mint{c}|void imprimirMatriz(int** matriz, int n, int m)|
+    Dada una matriz de $n$ filas y $m$ columnas, imprimir todos sus elementos en pantalla. Se deben imprimir todos los elementos de la primer fila, luego todos los de la segunda fila, y así sucesivamente. Por ejemplo, dada la matriz de $2x3$ [[1,2,3], [4,5,6]], se debe imprimir 1, 2, 3, 4, 5, 6.
+    
+    \item \mint{c}|void traspuesta(int** matrix, int n)|
+    Dada una matriz cuadrada de $nxn$, modificarla para obtener su traspuesta. Por ejemplo, dada la matriz cuadrada [[1,2], [3,4]], se debe modificar para obtener [[1, 3], [2, 4]]. \textit{Recuerden que la matriz traspuesta es aquella que surge como resultado de realizar un cambio de columnas por filas y filas por columnas en la matriz original.}
+    
+\end{enumerate}
+
 
 \part{Estructuras de Datos}
 \chapter{Listas}
