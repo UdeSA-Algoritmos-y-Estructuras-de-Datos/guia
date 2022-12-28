@@ -5,7 +5,7 @@
 \usepackage{graphicx}
 \usepackage{minted}
 \usepackage{booktabs}
-\usepackage[english,spanish,es-noindentfirst,es-nosectiondot,es-nolists,
+\usepackage[spanish,es-noindentfirst,es-nosectiondot,es-nolists,
 es-noshorthands,es-lcroman,es-tabla]{babel}
 \usepackage{lmodern}             % Use Latin Modern fonts
 \usepackage[T1]{fontenc}         % Better output when a diacritic/accent is used
@@ -21,6 +21,21 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
 \usepackage{csquotes}
 \usepackage{biblatex}
 \addbibresource{informe.bib}
+
+\usepackage{multicol}
+
+\usepackage{xcolor}
+
+\usepackage[lastexercise,answerdelayed]{exercise}
+
+\counterwithin{Exercise}{chapter}
+\counterwithin{Answer}{chapter}
+\renewcounter{Exercise}[chapter]
+
+\renewcommand{\ExerciseHeader}{%
+\textbf{\large\ExerciseHeaderDifficulty\ExerciseName\ %
+\ExerciseHeaderNB\ExerciseHeaderTitle\ExerciseHeaderOrigin}\medskip}
+
 
 \title{
 	Algoritmos \& Estructuras de Datos\\
@@ -42,61 +57,66 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
 \part{Introducción}
 \chapter{Lenguaje C}
 
-\begin{enumerate}
+%Ejercicios sin punteros
+\section{Ejercicios para entrar en calor}
+\begin{Exercise}
+Escribir la función que dado n $\in$ N devuelve si es primo. Recuerden que un número es primo si los únicos divisores que tiene son 1 y el mismo.
+\end{Exercise}
 
-    %Ejercicios sin punteros
-    \section{Ejercicios para entrar en calor}
+\begin{Exercise}
+Escribir la función que dado n $\in$ N devuelve la suma de todos los números impares menores que n.
+\end{Exercise}
 
-    \item Escribir la función que dado n $\in$ N devuelve si es primo. Recuerden que un número es primo si los únicos divisores que tiene son 1 y el mismo.
-    
-    \item Escribir la función que dado n $\in$ N devuelve la suma de todos los números impares menores que n.
+%Ejercicios para familiarizarse con punteros
+\section{Punteros y Arreglos}
 
-    %Ejercicios para familiarizarse con punteros
-    \section{Punteros y Arreglos}
+\begin{Exercise} ¿Cuál es el valor de \textit{a} y \textit{b} luego de ejecutar el programa?
+	\newline
+	\begin{minted}{c}
+	    void myFunc(int* a, int b)
+	    {
+	    (*a)++;
+	    b++;
+	    }
 
-    \item ¿Cuál es el valor de \textit{a} y \textit{b} luego de ejecutar el programa?
-    \begin{minted}{c}
-        void myFunc(int* a, int b)
-        {
-        (*a)++;
-        b++;
-        }
+	    void main()
+	    {
+	        int a = 10;
+	        int b = 10;
+	        myFunc(&a, b);
+	    }
+	\end{minted}
+\end{Exercise}
 
-        void main()
-        {
-            int a = 10;
-            int b = 10;
-            myFunc(&a, b);
-        }
-    \end{minted}
-
-    \item ¿Que valor se imprime por consola luego de cada llamado a \textit{printf}?
+\begin{Exercise} ¿Que valor se imprime por consola luego de cada llamado a \texttt{printf}?
+	\newline
     \begin{minted}{c}
         void main()
         {
            int x = 10;
            int* px = &x;
-    
+
            printf("%d \n", px);
            printf("%d \n", (*px));
-    
+
            (*px)++;
-    
+
            printf("%d \n", px);
            printf("%d \n", (*px));
         }
     \end{minted}
+\end{Exercise}
 
-    \item Programar las siguientes funciones en C:
-    \begin{enumerate}
-        \item\mint{c}|void crearArreglo(int v)|
-        Crea un arreglo estático de enteros de tamaño 8, inicializando todos sus elementos con $v$, y lo imprime en pantalla.
-        
-        \item\mint{c}|int* crearArregloDin(int n, int v)|
-        Dado un natural $n$, crea un arreglo de enteros de ese tamaño, inicializando todos sus elementos con $v$, y devuelve un puntero al mismo.
-        
-        \item Invocar la siguiente función con cualquiera de los arreglos inicializados anteriormente y convencerse de que sus elementos están ubicados de manera \textbf{contigua} en memoria. \textit{Recordar que cada elemento de tipo int ocupa $4$ bytes.}
-        
+\begin{Exercise} Implementar las siguientes funciones en C
+	\Question
+		\mint{c}|void crearArreglo(int v)|
+		Crea un arreglo estático de enteros de tamaño 8, inicializando todos sus elementos con $v$, y lo imprime en pantalla.
+
+	\Question \mint{c}|int* crearArregloDin(int n, int v)|
+		Dado un natural $n$, crea un arreglo de enteros de ese tamaño, inicializando todos sus elementos con $v$, y devuelve un puntero al mismo.
+
+	\Question Invocar la siguiente función con cualquiera de los arreglos inicializados anteriormente y convencerse de que sus elementos están ubicados de manera \textbf{contigua} en memoria. \textit{Recordar que cada elemento de tipo int ocupa $4$ bytes.}
+
     \begin{minted}{c}
     void mostrarMemoria(int* arr, int size)
     {
@@ -105,86 +125,84 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
             printf("Elemento: %d, Direccion: %d\n", i, &arr[i]);
         }
     }
-    \end{minted}    
-    
-    \end{enumerate}
+    \end{minted}
+\end{Exercise}
 
-    \item{Cuál es la diferencia entre {\textbf{malloc}} y {\textbf{calloc}}? Cuando utilizamos la función {\textbf{free}}?}
+\begin{Exercise}
+	Cuál es la diferencia entre {\textbf{malloc}} y {\textbf{calloc}}? Cuando utilizamos la función {\textbf{free}}?
+\end{Exercise}
 
-    \item Dado el siguiente struct que representa una Persona
+\begin{Exercise}
+	Dado el siguiente struct que representa una Persona
     \begin{minted}{c}
     typedef struct Persona{
         int edad;
         char* nombre;
     } Persona;
-    \end{minted} 
+    \end{minted}
 
-    \mint{c}|Persona* inicializarPersonas(int n)|
-    Completar la función inicializarPersonas, que dado un entero $n$, crea un arreglo de n personas, y devuelve un puntero al mismo. 
-    \begin{enumerate}
-        \item Utilizando \textbf{malloc}.
-        \item Utilizando \textbf{calloc}.
-    \end{enumerate}
-    
+	\mint{c}|Persona* inicializarPersonas(int n)|
+	Completar la función inicializarPersonas, que dado un entero $n$, crea un arreglo de n personas, y devuelve un puntero al mismo.
 
-    % Ejercicios integradores con arreglos
-    \subsection{Más arreglos!}
+	\Question Utilizando \textbf{malloc}.
+ 	\Question Utilizando \textbf{calloc}.
+\end{Exercise}
 
-    \item Programar las siguientes funciones en C:
-    \begin{enumerate}
-        \item\mint{c}|int maximo(int* arr, int size)|
+% Ejercicios integradores con arreglos
+\subsection{Más arreglos!}
+\begin{Exercise} Programar las siguientes funciones en C:
+	\Question \mint{c}|int maximo(int* arr, int size)|
         Dado un arreglo de enteros $arr$ de tamaño $size$, devuelve el máximo elemento.
-
-        \item\mint{c}|void sumador(int* arr, int size, int c)|
+	\Question \mint{c}|void sumador(int* arr, int size, int c)|
         Dado un arreglo de enteros $arr$ de tamaño $size$, y un entero $c$, suma $c$ a todos los elementos de $arr$.
-
-        \item\mint{c}|char* copiar(char* arr)|
+	\Question \mint{c}|char* copiar(char* arr)|
         Crea una copia de $arr$, y devuelve un puntero a la copia.
-        
-        \item\mint{c}|int* reverso(int* arr, int size)|
+	\Question \mint{c}|int* reverso(int* arr, int size)|
         Dado un arreglo de enteros $arr$ de tamaño $size$, devuelve su reverso. \newline
         Ejemplo: Dado [1, -2, 85, 65] se debe devolver [65, 85, -2, 1].
         \begin{enumerate}
             \item Se puede modificar $arr$.
             \item Sin modificar $arr$.
         \end{enumerate}
-
-        \item\mint{c}|bool estaOrdenado(int* arr, int size)|
+	\Question \mint{c}|bool estaOrdenado(int* arr, int size)|
         Dado un arreglo $arr$ de enteros de tamaño $size$, retorna true si es monótonamente creciente o monótonamente decreciente.
-
-        \item\mint{c}|bool esPalindromo(char* s)|
+ 	\Question \mint{c}|bool esPalindromo(char* s)|
         Dado un string $s$, retorna true si es un palíndromo. \textit{Recuerden que un palíndromo es una palabra que se lee igual en un sentido que en otro (por ejemplo; Ana, Anna, Otto).}
-    \end{enumerate}
+\end{Exercise}
 
-    % Ejercicios de searching and sorting
-    \section{Ordenamiento}
-
-    \item\mint{c}|void ordenar(int* arr, int size)|
+% Ejercicios de searching and sorting
+\section{Ordenamiento}
+\begin{Exercise}
+	\mint{c}|void ordenar(int* arr, int size)|
     Dado un arreglo de enteros $arr$ de tamaño $size$, escribir una función que lo ordene de menor a mayor.
-    \begin{enumerate}
-     \item Utilizando \textbf{\textit{selection sort}}.
-     \item Utilizando \textbf{\textit{insertion sort}}. 
-     \item Dar la complejidad temporal en el peor caso de ambos algoritmos.
-     \item Cual es la complejidad temporal en el peor caso de ambos algoritmos, suponiendo que el arreglo de entrada ya está ordenado?
-     % Para que piensen en el invariante de los algoritmos. 
+
+	\Question Utilizando \textbf{\textit{selection sort}}.
+    \Question Utilizando \textbf{\textit{insertion sort}}.
+    \Question Dar la complejidad temporal en el peor caso de ambos algoritmos.
+    \Question Cual es la complejidad temporal en el peor caso de ambos algoritmos, suponiendo que el arreglo de entrada ya está ordenado?
+     % Para que piensen en el invariante de los algoritmos.
     % Utilizar selection sort, ya que en la iteracion k-esima, tenes los k menores elementos
     % del arreglo en las posiciones [0...k]
-     \item Suponiendo que queremos obtener únicamente los $k < size$ menores elementos del arreglo, ¿Cuál de los dos algoritmos utilizaría? ¿Por qué?
-    \end{enumerate}
+    \Question Suponiendo que queremos obtener únicamente los $k < size$ menores elementos del arreglo, ¿Cuál de los dos algoritmos utilizaría? ¿Por qué?
+\end{Exercise}
 
-    \item Decimos que un algoritmo de ordenamiento es \textbf{estable} si preserva el orden relativo de los elementos con la misma clave. \newline
-    
+\begin{Exercise}
+Decimos que un algoritmo de ordenamiento es \textbf{estable} si preserva el orden relativo de los elementos con la misma clave. \newline
+
     Supongamos que queremos ordenar el arreglo de tuplas A = [(3,6), (1,5), (3,2)], utilizando como clave el primer componente de cada tupla. En este caso, dos resultados diferentes son posibles, uno de los cuales mantiene un orden relativo de elementos con claves iguales, y una en la que no:
 
-    [(1,5), (3,6), (3,2)] \textcolor{green}{Preserva el orden relativo entre (3,6) y (3,2)}
+	\definecolor{highlightgreen}{RGB}{23,81,23}
+	\definecolor{highlightred}{RGB}{81,23,23}
 
-    [(1,5), (3,2), (3,6)] \textcolor{red}{No preserva el orden relativo entre (3,6) y (3,2)}
+    [(1,5), (3,6), (3,2)] \textcolor{highlightgreen}{Preserva el orden relativo entre (3,6) y (3,2)}
 
-    \begin{enumerate}
-        \item Decidir si los algoritmos de ordenamiento presentados en el ejercicio anterior son estables. Justificar.
-    \end{enumerate}
+    [(1,5), (3,2), (3,6)] \textcolor{highlightred}{No preserva el orden relativo entre (3,6) y (3,2)}
 
-    \item Consideremos el siguiente algoritmo de ordenamiento, llamado \textbf{bubble sort} (suponemos que n es el tamaño del arreglo):
+    \Question Decidir si los algoritmos de ordenamiento presentados en el ejercicio anterior son estables. Justificar.
+\end{Exercise}
+
+\begin{Exercise}
+	Consideremos el siguiente algoritmo de ordenamiento, llamado \textbf{bubble sort} (suponemos que n es el tamaño del arreglo):
 
     \begin{minted}{c}
     int i = 0;
@@ -197,135 +215,142 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
                 swap(a, j, j+1);
             j++;
         }
-        
+
         i++;
     }
-    \end{minted} 
+    \end{minted}
 
-    \begin{enumerate}
-        \item Describir con palabras qué hace este algoritmo.
-        \item ¿Cuántas veces se ejecuta el swap del ciclo interior como máximo (i.e. en el peor caso)?
-    \end{enumerate}
+    \Question Describir con palabras qué hace este algoritmo.
+    \Question ¿Cuántas veces se ejecuta el swap del ciclo interior como máximo (i.e. en el peor caso)?
+\end{Exercise}
 
-    \item\mint{c}|bool twoSum(int* arr, int size, int target)|
+\begin{Exercise}
+	\mint{c}|bool twoSum(int* arr, int size, int target)|
     Dado un arreglo de enteros sin repetidos $arr$ de tamaño $size$, se debe devolver true si existen dos elementos $a1$ y $a2$ tal que $a1 + a2 = target$. En caso contrario, devolver false.
-    \begin{enumerate}
-        \item Dar una solución con complejidad temporal $O(n^2)$.
-        \item Dar una solución con complejidad temporal $O(n logn)$.
-    \end{enumerate}
-    
-\end{enumerate}
+
+	\Question Dar una solución con complejidad temporal $O(n^2)$.
+    \Question Dar una solución con complejidad temporal $O(n logn)$.
+
+\end{Exercise}
 
 % TODO: Deberiamos hacerlos en pseudocodigo al estilo Python? Algunos ejercicios pueden ser
 % muy engorrosos de implementar. Ej: mergesort.
 \chapter{Recursividad}
 
-    \begin{enumerate}
-    
-        \item\mint{c}|int fibo(int n)|
-        Los números de Fibonacci son una sucesión de números naturales definida por las ecuaciones:
-        $$F_n = F_{n-1} + F_{n-2}$$ con $F_1 = F_2 = 1$. Escribir una función recursiva para computar el n-ésimo número de Fibonacci.
+	\begin{Exercise}
+		\mint{c}|int fibo(int n)|
+	    Los números de Fibonacci son una sucesión de números naturales definida por las ecuaciones:
+    	$$F_n = F_{n-1} + F_{n-2}$$ con $F_1 = F_2 = 1$. Escribir una función recursiva para computar el n-ésimo número de Fibonacci.
+    \end{Exercise}
 
-         \item\mint{c}|int suma(int n)|
-         Escribir una función recursiva para calcular la suma de los primeros $n$ números.
+	\begin{Exercise}
+		\mint{c}|int suma(int n)|
+	    Escribir una función recursiva para calcular la suma de los primeros $n$ números.
+	\end{Exercise}
 
-         \item\mint{c}|int factorial(int n)|
-         Escribir una función recursiva para calcular el factorial de $n$.
+	\begin{Exercise}
+		\mint{c}|int factorial(int n)|
+    	Escribir una función recursiva para calcular el factorial de $n$.
+    \end{Exercise}
 
-         \item\mint{c}|int potencia(int a, int n)|
-         Escribir una función recursiva para calcular $a^n$.
+	\begin{Exercise}
+		\mint{c}|int potencia(int a, int n)|
+        Escribir una función recursiva para calcular $a^n$.
+    \end{Exercise}
 
-         \item\mint{c}|void imprimir(int* arr, int n)|
-         Escribir una función recursiva para imprimir todos los elementos de un arreglo con $n$ elementos.
+	\begin{Exercise}
+		\mint{c}|void imprimir(int* arr, int n)|
+        Escribir una función recursiva para imprimir todos los elementos de un arreglo con $n$ elementos.
+    \end{Exercise}
 
-         \item\mint{c}|void imprimirReverso(int* arr, int n)|
-         Escribir una función recursiva para imprimir todos los elementos de un arreglo con $n$ elementos en orden reverso.
+	\begin{Exercise}
+		\mint{c}|void imprimirReverso(int* arr, int n)|
+        Escribir una función recursiva para imprimir todos los elementos de un arreglo con $n$ elementos en orden reverso.
+    \end{Exercise}
 
-         \item\mint{c}|int max(int* arr, int n)|
+	\begin{Exercise}
+		\mint{c}|int max(int* arr, int n)|
          Escribir una función recursiva para calcular el máximo elemento de un arreglo de $n$ elementos.
+    \end{Exercise}
 
-         \item\mint{c}|int ocurrencias(int* arr, int n, int elem)|
-         Escribir una función recursiva para contar la cantidad de veces que aparece el elemento $elem$ en un arrreglo $arr$ de $n$ elementos.
+	\begin{Exercise}
+		\mint{c}|int ocurrencias(int* arr, int n, int elem)|
+        Escribir una función recursiva para contar la cantidad de veces que aparece el elemento $elem$ en un arrreglo $arr$ de $n$ elementos.
+	\end{Exercise}
 
-         \item\mint{c}|void reverso(char* str)|
-         Escribir una función recursiva para convertir $str$ en su reverso. Por ejemplo, dado el String "abc", se debe modificarlo para obtener "cba".
+	\begin{Exercise}
+		\mint{c}|void reverso(char* str)|
+        Escribir una función recursiva para convertir $str$ en su reverso. Por ejemplo, dado el String "abc", se debe modificarlo para obtener "cba".
+	\end{Exercise}
 
-         
+	\begin{Exercise}
+		Como vieron en la teórica, \textbf{merge sort} es el algoritmo recursivo más conocido para ordenar un arreglo. Utiliza una técnica algorítmica conocida como \textbf{Divide and Conquer}, y consta en dividir el arreglo en dos partes iguales, ordenar cada una recursivamente, y finalmente combinar los resultados.
 
-        
+		\Question Implementar merge sort utilizando pseudocódigo. Dar su complejidad temporal.
+		\Question ¿Que desventaja tiene merge sort al ser un algoritmo recursivo? \newline\textit{Sugerencia: Pensar en la complejidad espacial y el stack del proceso.}
+	\end{Exercise}
 
-        \item Como vieron en la teórica, \textbf{merge sort} es el algoritmo recursivo más conocido para ordenar un arreglo. Utiliza una técnica algorítmica conocida como \textbf{Divide and Conquer}, y consta en dividir el arreglo en dos partes iguales, ordenar cada una recursivamente, y finalmente combinar los resultados.
-        \begin{enumerate}
-            \item Implementar merge sort utilizando pseudocódigo. Dar su complejidad temporal.
-            \item ¿Que desventaja tiene merge sort al ser un algoritmo recursivo? \newline\textit{Sugerencia: Pensar en la complejidad espacial y el stack del proceso.}
-        \end{enumerate}
+\begin{Exercise} La \textbf{búsqueda binaria} es un algoritmo eficiente para encontrar un elemento \textbf{en un arreglo ordenado}. El código es el siguiente: (Suponiendo que n es el tamaño del arreglo).
 
-        \item La \textbf{búsqueda binaria} es un algoritmo eficiente para encontrar un elemento \textbf{en un arreglo ordenado}. El código es el siguiente: (Suponiendo que n es el tamaño del arreglo).
-
-            \begin{minted}{c}
+    \begin{minted}{c}
     bool binarySearch(int* a, int n, int target)
     {
         int low = 0, high = n - 1;
-        
+
         // Iteramos hasta agotar los elementos
         while (low <= high)
         {
             // Calculamos el punto medio del arreglo
             int mid = (low + high)/2;
-            
+
             // Encontramos el target
             if (target == nums[mid]) {
                 return true;
             }
-     
-            // Si el target es menor que el elemento del medio, 
+
+            // Si el target es menor que el elemento del medio,
             // descartamos todos los elementos a la derecha.
             else if (target < nums[mid]) {
                 high = mid - 1;
             }
-     
-            // Si el target es mayor que el elemento del medio, 
+
+            // Si el target es mayor que el elemento del medio,
             // descartamos todos los elementos a la izquierda.
             else {
                 low = mid + 1;
             }
         }
- 
+
     // Taget no está en el arreglo.
     return false;
 
     }
-    \end{minted} 
+    \end{minted}
 
-    \begin{enumerate}
-        \item Describir con palabras qué hace este algoritmo.
-        \item Mostrar con un ejemplo que el algoritmo \textbf{no} es correcto si el arreglo de entrada no esta ordenado.
-        \item Implementar la búsqueda binaria utilizando recursión. Dar su complejidad temporal.
-    \end{enumerate}
+    \Question Describir con palabras qué hace este algoritmo.
+    \Question Mostrar con un ejemplo que el algoritmo \textbf{no} es correcto si el arreglo de entrada no esta ordenado.
+    \Question Implementar la búsqueda binaria utilizando recursión. Dar su complejidad temporal.
+\end{Exercise}
 
-        
-    \item\mint{c}|int* buscarRango(int* arr, int size, int target)|
+\begin{Exercise}
+    \mint{c}|int* buscarRango(int* arr, int size, int target)|
     Dado un arreglo de enteros $arr$ de tamaño $size$, ordenado de menor a mayor, encontrar los índices de comienzo y de final de $target$. Devolverlos en un arreglo. Además, se puede suponer que $target$ es un elemento de $arr$.
     \newline
     Por ejemplo, si arr = [5,7,7,8,8,8,10], target = 8, se debe devolver [3,5].
-    \begin{enumerate}
-        \item El algoritmo dado debe tener complejidad $O(n)$.
-        \item (Dificil) El algoritmo dado debe tener complejidad $O(log{}n)$.\newline
-    \end{enumerate}
 
-        
-        
-    \end{enumerate}
-    
+    \Question El algoritmo dado debe tener complejidad $O(n)$.
+	\Question[difficulty=5] El algoritmo dado debe tener complejidad $O(\log n)$.
+\end{Exercise}
+
 
 \chapter{Lectura de Archivos}
 
 % Algunos ejercicios con punteros dobles
 \chapter{Magia con Punteros}
 
-\begin{enumerate}
+\begin{Exercise}
 
-    \item\begin{minted}{c}
+\begin{minted}{c}
 typedef struct Persona {
     char* nombre;
     char* apellido;
@@ -337,23 +362,70 @@ char* masGrande(Persona** personas, int n)
 {
     // COMPLETAR
 }
-    \end{minted}
+\end{minted}
 
-    Completar la función $masGrande$, que dado un arreglo de n personas, devuelve el nombre de la persona de mayor edad.
+Completar la función $masGrande$, que dado un arreglo de n personas, devuelve el nombre de la persona de mayor edad.
 
-    \item \mint{c}|void imprimirMatriz(int** matrix, int n, int m)|
+\end{Exercise}
+
+\begin{Exercise}
+	\mint{c}|void imprimirMatriz(int** matrix, int n, int m)|
     Dada una matriz de $n$ filas y $m$ columnas, imprimir todos sus elementos en pantalla. Se deben imprimir todos los elementos de la primer fila, luego todos los de la segunda fila, y así sucesivamente. Por ejemplo, dada la matriz de $2x3$ [[1,2,3], [4,5,6]], se debe imprimir 1, 2, 3, 4, 5, 6.
-    
-    \item \mint{c}|void traspuesta(int** matrix, int n)|
-    Dada una matriz cuadrada de $nxn$, modificarla para obtener su traspuesta. Por ejemplo, dada la matriz cuadrada [[1,2], [3,4]], se debe modificar para obtener [[1, 3], [2, 4]]. \textit{Recuerden que la matriz traspuesta es aquella que surge como resultado de realizar un cambio de columnas por filas y filas por columnas en la matriz original.}
-    
-\end{enumerate}
+\end{Exercise}
 
+\begin{Exercise}
+	\mint{c}|void traspuesta(int** matrix, int n)|
+    Dada una matriz cuadrada de $nxn$, modificarla para obtener su traspuesta. Por ejemplo, dada la matriz cuadrada [[1,2], [3,4]], se debe modificar para obtener [[1, 3], [2, 4]]. \textit{Recuerden que la matriz traspuesta es aquella que surge como resultado de realizar un cambio de columnas por filas y filas por columnas en la matriz original.}
+
+\end{Exercise}
 
 \part{Estructuras de Datos}
 \chapter{Listas}
+\begin{Exercise}
+	\Question ¿Qué cambios se le tendrían que hacer a una lista simplemente enlazada para permitir que la operación \texttt{eliminar último} tenga complejidad $O\left(1\right)$?
+	\Question[difficulty=5] ¿Se le ocurre cómo hacer para que la solución al punto anterior tenga una menor complejidad de memoria?
+\end{Exercise}
+\begin{Answer}
+		Este ejercicio apunta a ayudar a descubrir las listas doblemente enlazadas y las XOR lists.
+\end{Answer}
 
 \chapter{Pilas}
+\begin{Exercise}
+	Implementar una calculadora de notación polaca. A continuación, se provee un ejemplo:
+\begin{minted}{c}
+
+int calcular(pila_t* pila) {
+	// completar
+}
+
+int main(void) {
+	pila_t* pila = pila_crear();
+
+	// 25 * 2 + 10 - 2 * 3 - 4
+	// Pasa a ser:
+	// - - + * 25 2 10 * 2 3 4
+
+	pila_apilar(&pila, "4");
+	pila_apilar(&pila, "3");
+	pila_apilar(&pila, "2");
+	pila_apilar(&pila, "*");
+	pila_apilar(&pila, "10");
+	pila_apilar(&pila, "2");
+	pila_apilar(&pila, "25");
+	pila_apilar(&pila, "*");
+	pila_apilar(&pila, "+");
+	pila_apilar(&pila, "-");
+	pila_apilar(&pila, "-");
+
+	int resultado = calcular(&pila);
+	// debería imprimir 50
+	printf("El resultado es %d", resultado);
+
+	return 0;
+}
+\end{minted}
+
+\end{Exercise}
 
 \chapter{Colas}
 
@@ -364,6 +436,9 @@ char* masGrande(Persona** personas, int n)
 \chapter{Grafos}
 
 \chapter{Hashing}
+
+\chapter{Respuestas}
+\shipoutAnswer
 
 \printbibliography{}
 
