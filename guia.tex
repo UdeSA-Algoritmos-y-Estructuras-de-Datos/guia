@@ -19,6 +19,8 @@ es-noshorthands,es-lcroman,es-tabla]{babel}
 \usepackage[width=14cm,left=3.5cm,marginparwidth=3cm,marginparsep=0.35cm,
 height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
 \usepackage{csquotes}
+\usepackage{fontawesome5}
+
 \usepackage{biblatex}
 \addbibresource{informe.bib}
 
@@ -32,10 +34,15 @@ height=21cm,top=3.7cm,headsep=1cm, headheight=1.6cm,footskip=1.2cm]{geometry}
 \counterwithin{Answer}{chapter}
 \renewcounter{Exercise}[chapter]
 
+\def\DifficultyMarker{\faIcon{exclamation-triangle}}
+
 \renewcommand{\ExerciseHeader}{%
 \textbf{\large\ExerciseHeaderDifficulty\ExerciseName\ %
 \ExerciseHeaderNB\ExerciseHeaderTitle\ExerciseHeaderOrigin}\medskip}
 
+\newcommand{\ChatGPT}{\faIcon{robot}}
+
+\newminted{c}{linenos,autogobble,tabsize=4}
 
 \title{
 	Algoritmos \& Estructuras de Datos\\
@@ -72,7 +79,7 @@ Escribir la función que dado n $\in$ N devuelve la suma de todos los números i
 
 \begin{Exercise} ¿Cuál es el valor de \textit{a} y \textit{b} luego de ejecutar el programa?
 	\newline
-	\begin{minted}{c}
+	\begin{ccode}
 	    void myFunc(int* a, int b)
 	    {
 	    (*a)++;
@@ -85,12 +92,12 @@ Escribir la función que dado n $\in$ N devuelve la suma de todos los números i
 	        int b = 10;
 	        myFunc(&a, b);
 	    }
-	\end{minted}
+	\end{ccode}
 \end{Exercise}
 
 \begin{Exercise} ¿Que valor se imprime por consola luego de cada llamado a \texttt{printf}?
 	\newline
-    \begin{minted}{c}
+    \begin{ccode}
         void main()
         {
            int x = 10;
@@ -104,7 +111,7 @@ Escribir la función que dado n $\in$ N devuelve la suma de todos los números i
            printf("%d \n", px);
            printf("%d \n", (*px));
         }
-    \end{minted}
+    \end{ccode}
 \end{Exercise}
 
 \begin{Exercise} Implementar las siguientes funciones en C
@@ -117,7 +124,7 @@ Escribir la función que dado n $\in$ N devuelve la suma de todos los números i
 
 	\Question Invocar la siguiente función con cualquiera de los arreglos inicializados anteriormente y convencerse de que sus elementos están ubicados de manera \textbf{contigua} en memoria. \textit{Recordar que cada elemento de tipo int ocupa $4$ bytes.}
 
-    \begin{minted}{c}
+    \begin{ccode}
     void mostrarMemoria(int* arr, int size)
     {
         for(int i=0; i<size; i++)
@@ -125,7 +132,7 @@ Escribir la función que dado n $\in$ N devuelve la suma de todos los números i
             printf("Elemento: %d, Direccion: %d\n", i, &arr[i]);
         }
     }
-    \end{minted}
+    \end{ccode}
 \end{Exercise}
 
 \begin{Exercise}
@@ -134,12 +141,12 @@ Escribir la función que dado n $\in$ N devuelve la suma de todos los números i
 
 \begin{Exercise}
 	Dado el siguiente struct que representa una Persona
-    \begin{minted}{c}
+    \begin{ccode}
     typedef struct Persona{
         int edad;
         char* nombre;
     } Persona;
-    \end{minted}
+    \end{ccode}
 
 	\mint{c}|Persona* inicializarPersonas(int n)|
 	Completar la función inicializarPersonas, que dado un entero $n$, crea un arreglo de n personas, y devuelve un puntero al mismo.
@@ -204,7 +211,7 @@ Decimos que un algoritmo de ordenamiento es \textbf{estable} si preserva el orde
 \begin{Exercise}
 	Consideremos el siguiente algoritmo de ordenamiento, llamado \textbf{bubble sort} (suponemos que n es el tamaño del arreglo):
 
-    \begin{minted}{c}
+    \begin{ccode}
     int i = 0;
     while( i < n-1 )
     {
@@ -218,7 +225,7 @@ Decimos que un algoritmo de ordenamiento es \textbf{estable} si preserva el orde
 
         i++;
     }
-    \end{minted}
+    \end{ccode}
 
     \Question Describir con palabras qué hace este algoritmo.
     \Question ¿Cuántas veces se ejecuta el swap del ciclo interior como máximo (i.e. en el peor caso)?
@@ -292,7 +299,7 @@ Decimos que un algoritmo de ordenamiento es \textbf{estable} si preserva el orde
 
 \begin{Exercise} La \textbf{búsqueda binaria} es un algoritmo eficiente para encontrar un elemento \textbf{en un arreglo ordenado}. El código es el siguiente: (Suponiendo que n es el tamaño del arreglo).
 
-    \begin{minted}{c}
+    \begin{ccode}
     bool binarySearch(int* a, int n, int target)
     {
         int low = 0, high = n - 1;
@@ -325,7 +332,7 @@ Decimos que un algoritmo de ordenamiento es \textbf{estable} si preserva el orde
     return false;
 
     }
-    \end{minted}
+    \end{ccode}
 
     \Question Describir con palabras qué hace este algoritmo.
     \Question Mostrar con un ejemplo que el algoritmo \textbf{no} es correcto si el arreglo de entrada no esta ordenado.
@@ -339,7 +346,7 @@ Decimos que un algoritmo de ordenamiento es \textbf{estable} si preserva el orde
     Por ejemplo, si arr = [5,7,7,8,8,8,10], target = 8, se debe devolver [3,5].
 
     \Question El algoritmo dado debe tener complejidad $O(n)$.
-	\Question[difficulty=5] El algoritmo dado debe tener complejidad $O(\log n)$.
+	\Question[difficulty=1] El algoritmo dado debe tener complejidad $O(\log n)$.
 \end{Exercise}
 
 
@@ -350,7 +357,7 @@ Decimos que un algoritmo de ordenamiento es \textbf{estable} si preserva el orde
 
 \begin{Exercise}
 
-\begin{minted}{c}
+\begin{ccode}
 typedef struct Persona {
     char* nombre;
     char* apellido;
@@ -362,7 +369,7 @@ char* masGrande(Persona** personas, int n)
 {
     // COMPLETAR
 }
-\end{minted}
+\end{ccode}
 
 Completar la función $masGrande$, que dado un arreglo de n personas, devuelve el nombre de la persona de mayor edad.
 
@@ -383,16 +390,71 @@ Completar la función $masGrande$, que dado un arreglo de n personas, devuelve e
 \chapter{Listas}
 \begin{Exercise}
 	\Question ¿Qué cambios se le tendrían que hacer a una lista simplemente enlazada para permitir que la operación \texttt{eliminar último} tenga complejidad $O\left(1\right)$?
-	\Question[difficulty=5] ¿Se le ocurre cómo hacer para que la solución al punto anterior tenga una menor complejidad de memoria?
+	\Question[difficulty=1] ¿Se le ocurre cómo hacer para que la solución al punto anterior tenga una menor complejidad de memoria?
 \end{Exercise}
 \begin{Answer}
 		Este ejercicio apunta a ayudar a descubrir las listas doblemente enlazadas y las XOR lists.
 \end{Answer}
 
+\begin{Exercise}[origin=\ChatGPT]
+	Implementar una función que permita verificar si una lista es un palíndromo (es decir, los elementos son los mismos cuando se lee de principio a fin o al revés). No se pueden usar estructuras de datos adicionales para resolver este problema.
+	\Question ¿Qué complejidad temporal tiene la solución al problema anterior?
+\end{Exercise}
+
+\begin{Exercise}
+	Implementar funciones para unir dos listas $l1$ y $l2$.
+	\Question Anexando todos los elementos de $l2$ al final de $l1$
+	\Question Intercalando elementos de $l1$ y $l2$
+\end{Exercise}
+
+\begin{Exercise}
+	En diversos sistemas distribuidos es común ver arquitecturas que utilizan \textit{anillos} para balancear carga o sincronizarse. Un ejemplo es como Cassandra maneja las particiones de datos. En este ejercicio se propone:
+	\Question Pensar que modificaciones hay que hacer a una lista simplemente enlazada para convertirla en una lista circular.
+	\Question Queremos que nuestro anillo tenga 256 posiciones. Pensar como limitar la cantidad de nodos acorde a esta limitación.
+	\Question Implementar una función \texttt{insertarDato} que permita insertar datos en nuestro anillo.
+
+	\begin{ccode}
+	int insertarDato(lista_circular_t* listac, int dato) {
+		// garantizado que devuelve un valor entre 0 y 255 inclusive
+		int particion = hash(dato);
+		// completar
+	}
+	\end{ccode}
+
+	En esta función, la \textit{partición} donde se guardará el dato es un número entero entre 0 y 255 (de modo de quedar dentro del rango de 256 posiciones de nuestro anillo). Luego, donde hay que completar, se debe buscar cuál es el nodo que maneja esa partición. Un nodo $j$ conoce su posición inicial $i_j$ y tiene una lista enlazada de datos. Una vez encontrado el nodo, se debe colocar en su lista de datos el dato pasado.
+	\Question Pensar como se deben rebalancear los datos del anillo cuando se agrega un nuevo nodo en una posición aleatoria.
+	\Question Análogamente, pensar como se deben rebalancear los datos del anillo cuando se remueve un nodo.
+\end{Exercise}
+
 \chapter{Pilas}
 \begin{Exercise}
+	Implementar un programa que lea una secuencia de letras hasta llegar a un punto e imprima los caracteres ingresados en orden inverso.
+\end{Exercise}
+
+\begin{Exercise}
+	Escribir un programa que lee una secuencia de caracteres y verifica que todos los parentesis, corchetes y llaves están balanceados.
+\end{Exercise}
+
+\begin{Exercise}
+	Implementar las siguientes funciones
+	\Question \mintinline{c}|int stack_sorted_descending(pila_t* pila);| que verifica si los elementos de la pila están ordenados en orden decreciente
+	\Question \mintinline{c}|int stack_sorted_ascending(pila\_t* pila);| que verifica si los elementos de la pila están ordenados en orden creciente
+\end{Exercise}
+
+\begin{Exercise}
+	Dados dos numeros $n$ y $m$, y la siguiente lista de operaciones permitidas:
+	\begin{enumerate}
+		\item $n \to n + 1$
+		\item $n \to n + 2$
+		\item $n \to n * 2$
+	\end{enumerate}
+
+	Escribir una función que encuentre la secuencia más corta de operaciones permitidas para llegar de $n$ a $m$.
+\end{Exercise}
+
+\begin{Exercise}
 	Implementar una calculadora de notación polaca. A continuación, se provee un ejemplo:
-\begin{minted}{c}
+\begin{ccode}
 
 int calcular(pila_t* pila) {
 	// completar
@@ -423,13 +485,20 @@ int main(void) {
 
 	return 0;
 }
-\end{minted}
-
+\end{ccode}
 \end{Exercise}
 
 \chapter{Colas}
+\begin{Exercise}
+	Utilizando una cola, invertir una pila.
+\end{Exercise}
 
 \chapter{Heaps}
+\begin{Exercise}
+	Cuál es la complejidad de \texttt{heapify}
+	\Question Utilizando \texttt{heapify up}
+	\Question Utilizando \texttt{heapify down}
+\end{Exercise}
 
 \chapter{Árboles}
 
