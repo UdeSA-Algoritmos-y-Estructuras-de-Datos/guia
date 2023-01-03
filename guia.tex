@@ -495,12 +495,57 @@ int main(void) {
 
 \chapter{Heaps}
 \begin{Exercise}
-	Cuál es la complejidad de \texttt{heapify}
+	Implementar el algoritmo \texttt{heapify} y dar su complejidad temporal.
 	\Question Utilizando \texttt{heapify up}
 	\Question Utilizando \texttt{heapify down}
+
+ 
 \end{Exercise}
 
 \chapter{Árboles}
+
+\subsection{Árboles Binarios}
+
+\begin{Exercise}
+	Recorrer un árbol binario utilizando los siguientes recorridos
+	\Question Preorder
+	\Question Postorder
+        \Question Inorder
+\end{Exercise}
+
+\begin{Exercise}
+    La altura de un árbol binario se define como la cantidad de ejes entre la raíz y la hoja más lejana. Implementar la función \mintinline{c}|int altura(Node* raiz)| que dada la raíz de un árbol binario, devuelve su altura. Dar su complejidad temporal.
+\end{Exercise}
+
+\begin{Exercise}
+   Implemente la función \mintinline{c}|bool sumTree(Node* raíz)| que retorna verdadero si un árbol binario es un sumTree. Un sumTree es un árbol en donde el valor de todos sus nodos es igual a la suma de todos los nodos de su subárbol izquierdo más los del subárbol derecho. Dar su complejidad temporal.
+\end{Exercise}
+
+\subsection{Árboles Binarios de Búsqueda}
+
+\begin{Exercise}
+   Implemente la función \mintinline{c}|bool esBST(Node* raíz)| que retorna verdadero si el árbol binario es un árbol de búsqueda. Dar su complejidad temporal.
+\end{Exercise}
+
+\begin{Exercise}
+   Implemente la función \mintinline{c}|bool pertenece(Node* raíz, target int)| que retorna verdadero si el target pertenece al árbol binario de búsqueda.
+   	\Question Dar su complejidad temporal.
+	\Question Dar su complejidad temporal en el caso en que el árbol esté balanceado.
+\end{Exercise}
+
+\begin{Exercise}
+   Dado un árbol de búsqueda binario y un elemento, agregarlo al árbol. Se debe asegurar que el árbol resultante siga siendo un árbol de búsqueda binario válido después de agregar el elemento.
+\end{Exercise}
+
+\begin{Exercise}
+   Dado un árbol de búsqueda binario y un elemento perteneciente al árbol, eliminar ese elemento del árbol. Se debe asegurar que el árbol resultante siga siendo un árbol de búsqueda binario válido después de eliminar el elemento.
+\end{Exercise}
+
+\begin{Exercise}
+   Dado un arreglo entero nums donde los elementos están ordenados en orden ascendente, implementar una función que lo convierta en un árbol de búsqueda binario \textbf{balanceado}. Dar su complejidad temporal.
+\end{Exercise}
+
+
 
 \chapter{Grafos}
 
