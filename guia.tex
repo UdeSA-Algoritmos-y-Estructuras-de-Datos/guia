@@ -506,8 +506,13 @@ Implementar una pila utilizando dos colas
 	Implementar el algoritmo \texttt{heapify} y dar su complejidad temporal.
 	\Question Utilizando \texttt{heapify up}
 	\Question Utilizando \texttt{heapify down}
+\end{Exercise}
 
- 
+\begin{Exercise}
+    Queremos una función \texttt{top k} que recibe un arreglo de números y un valor $k$ y devuelve los $k$ mayores del arreglo.
+	\Question La primer implementación ordena el arreglo y busca los $k$ mayores en las primeras $k$ posiciones. Indique el orden.
+	\Question La segunda implementación usa un arreglo auxiliar de $k$ elementos. Se recorre el arreglo de números y cada número se compara con los $k$ en el arreglo auxiliar: si es mayor a alguno se saca el menor de ellos reemplazándolo por el nuevo. Indique el orden de esta implementación.
+    \Question Realice una implementación cuyo orden sea $O(n log(k))$.
 \end{Exercise}
 
 \chapter{Árboles}
@@ -530,7 +535,7 @@ Implementar una pila utilizando dos colas
 \end{Exercise}
 
 \begin{Exercise}
-   Implemente la función \mintinline{c}|bool sumTree(Node* raíz)| que retorna verdadero si un árbol binario es un sumTree. Un sumTree es un árbol en donde el valor de todos sus nodos es igual a la suma de todos los nodos de su subárbol izquierdo más los del subárbol derecho. Dar su complejidad temporal. (Agregar un ejemplo)
+   Implemente la función \mintinline{c}|bool sumTree(Node* raíz)| que retorna verdadero si un árbol binario es un sumTree. Un sumTree es un árbol en donde el valor de todos sus nodos es igual a la suma de todos los nodos de su subárbol izquierdo más los del subárbol derecho. Dar su complejidad temporal.
 \end{Exercise}
 
 \subsection{Árboles Binarios de Búsqueda}
