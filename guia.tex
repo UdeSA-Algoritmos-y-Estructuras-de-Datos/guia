@@ -502,6 +502,9 @@ Implementar una pila utilizando dos colas
 \end{Exercise}
 
 \chapter{Heaps}
+
+\subsection{Heap}
+
 \begin{Exercise}
 	Implementar el algoritmo \texttt{heapify} y dar su complejidad temporal.
 	\Question Utilizando \texttt{heapify up}
@@ -513,6 +516,47 @@ Implementar una pila utilizando dos colas
 	\Question La primer implementación ordena el arreglo y busca los $k$ mayores en las primeras $k$ posiciones. Indique el orden.
 	\Question La segunda implementación usa un arreglo auxiliar de $k$ elementos. Se recorre el arreglo de números y cada número se compara con los $k$ en el arreglo auxiliar: si es mayor a alguno se saca el menor de ellos reemplazándolo por el nuevo. Indique el orden de esta implementación.
     \Question Realice una implementación cuyo orden sea $O(n log(k))$.
+\end{Exercise}
+
+\begin{Exercise}
+    Mergear $M$ arreglos ordenados en un solo arreglo ordenado en $O(n log(m))$, donde $n$ es la cantidad total de elementos de todos los arreglos.
+\end{Exercise}
+
+\begin{Exercise}
+    Implementar un algoritmo que verifique si un arreglo de números representa a un heap.
+\end{Exercise}
+
+\begin{Exercise}
+    Recibimos dos arreglos ordenados $A$ y $B$ y un número $k$. Nos piden encontrar los $k$ pares de ambos arreglos que menos suman (cumpliendo que sean k). Ejemplos:
+    \begin{itemize}
+      \item $A = [0, 1, 3, 6]$, $B = [1, 2, 5]$
+      \begin{enumerate}
+        \item Con $k=1$ la solución es $[(0, 1)]$ ya que es el único par que suma 1.
+        \item Con $k=2$ la solución es $[(1, 1), (0, 2)]$.
+        \item Con $k=3$ no hay solución.
+      \end{enumerate}
+      \item $A = [0, 2, 5, 7]$, $B = [0, 1, 3, 6]$
+      \begin{enumerate}
+        \item Con $k=1$ la solución es $[(0, 1)]$.
+        \item Con $k=2$ la solución es $[(2, 1), (3, 0)]$.
+        \item Con $k=3$ la solución es $[(2, 6), (5, 3), (7, 1)]$.
+      \end{enumerate}
+    \end{itemize}
+    Implemente una función que lo resuelva en $O(n log(n))$
+\end{Exercise}
+
+\begin{Exercise}
+Recibimos números constantemente (que no llegan ordenados de ninguna forma) y queremos saber en cualquier momento la mediana de todos ellos. La mediana es el número que deja al 50\% de los números a su izquierda (menores a el) y al otro 50\% a su derecha (los mayores).
+Ejemplos:
+\begin{itemize}
+    \item Para $[1,2,4,6]$ la mediana es $3$.
+    \item Para $[1,2,6]$ la mediana es $2$.
+    \item Para $[1,2,4,4,6]$ la mediana es $4$.
+\end{itemize}
+
+Podemos querer la mediana varios momentos a medida nos llegan los números. Debemos implementar dos funciones:
+    \Question \texttt{add} agrega un número nuevo
+    \Question \texttt{get median} obtiene la mediana actual. Se pide que sea $O(1)$.
 \end{Exercise}
 
 \chapter{Árboles}
