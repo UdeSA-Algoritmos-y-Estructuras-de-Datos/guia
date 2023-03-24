@@ -496,15 +496,13 @@ int main(void) {
 \end{Exercise}
 
 \begin{Exercise}
-Implementar una cola utilizando un arreglo
+	Implementar una cola utilizando un arreglo dinámico. Pensar esta estructura como una interfaz amigable a un arreglo en memoria dinámica, de modo que los llamados a \texttt{malloc} y \texttt{realloc } sean transparentes al usuario.
 \end{Exercise}
 
 \begin{Exercise}
 Implementar una cola utilizando una lista simplemente enlazada.
-\end{Exercise}
 
-\begin{Exercise}
-Implementar una cola utilizando una lista doblemente enlazada.
+\Question ¿Haría alguna diferencia utilizar una lista doblemente enlazada?
 \end{Exercise}
 
 \begin{Exercise}
@@ -512,8 +510,6 @@ Implementar una pila utilizando dos colas
 \end{Exercise}
 
 \chapter{Heaps}
-
-\subsection{Heap}
 
 \begin{Exercise}
 	Implementar el algoritmo \texttt{heapify} y dar su complejidad temporal.
@@ -567,6 +563,49 @@ Ejemplos:
 Podemos querer la mediana varios momentos a medida nos llegan los números. Debemos implementar dos funciones:
     \Question \texttt{add} agrega un número nuevo
     \Question \texttt{get median} obtiene la mediana actual. Se pide que sea $O(1)$.
+\end{Exercise}
+
+\begin{Exercise}[difficulty=1]
+	Una de las optimizaciones más comunes al servir modelos de Deep Learning en servidores web es lo que se denomina \textit{microbatching}. En lugar de pasarle cada input por separado modelo, se le pasa un grupo de inputs (un \textit{batch}) y se obtienen todas las salidas al mismo tiempo. De este modo, la \textit{latencia} de cada request es mayor (el tiempo desde que se envía el request hasta que el cliente obtiene la respuesta) pero el \textit{throughput} es mayor (la cantidad de requests procesados por segundo).
+
+	En este ejercicio, imaginaremos que estamos sirviendo un modelo que recibe una entrada de texto \texttt{input} y un parámetro \texttt{n}, que es un parámetro a pasarle al modelo para inferencia. El valor de \texttt{n} $\in \left[1, 20\right]$. Solo podemos armar un \textit{batch} con elementos con el mismo valor de \texttt{n}. Queremos implementar una estructura de datos que nos permita obtener, en un momento dado, los \texttt{k} elementos más antiguos del grupo cuyo elemento más antiguo lleva mas tiempo esperando para ser procesado.
+
+	\textit{Ejemplo:}\\
+
+    \begin{ccode}
+    encolar_request(estructura, "texto1.0", 1);
+	encolar_request(estructura, "texto1.1", 1);
+	encolar_request(estructura, "texto2.1", 2);
+	encolar_request(estructura, "texto2.2", 2);
+	encolar_request(estructura, "texto2.3", 2);
+	encolar_request(estructura, "texto3.0", 3);
+	encolar_request(estructura, "texto2.4", 2);
+	encolar_request(estructura, "texto3.1", 3);
+	input_t **inputs = obtener_batch(estructura, 4);
+	\end{ccode}
+
+	Nos debería dar como resultado los elementos con \texttt{input} "texto1.0" y "texto1.1":
+	\begin{enumerate}
+		\item El elemento con \texttt{input} "texto1.0" es el más antiguo
+		\item Si bien pedimos 4 elementos, solo hay 2 en ese grupo.
+	\end{enumerate}
+
+	Si pidieramos \mintinline{c}|obtener_batch(estructura, 4)|, obtendríamos los $4$ elementos con \texttt{n=2}.
+
+	La estructura debe cumplir la siguiente interfaz:
+    \begin{ccode}
+		// Encola un request
+		encolar_request(estructura_t *estructura, char *input, int n);
+
+		// Obtiene el batch de k elementos cuyo elemento más
+		// antiguo sea el más antiguo esperando a ser procesado.
+		obtener_batch(estructura_t *estructura, int k);
+	\end{ccode}
+
+Se pide esbozar la estructura y las dos primitivas anteriores. Justificar su complejidad temporal.
+\\
+\textit{Hint: } pensar como podemos aprovechar que el valor de $n$ tiene un rango fijo. Utilizar estructuras de datos explicadas previamente (colas, pilas, heaps, arreglos).
+
 \end{Exercise}
 
 \chapter{Árboles}
