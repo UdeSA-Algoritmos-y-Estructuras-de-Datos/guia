@@ -655,11 +655,54 @@ Se pide esbozar la estructura y las dos primitivas anteriores. Justificar su com
    Dado un arreglo entero nums donde los elementos están ordenados en orden ascendente, implementar una función que lo convierta en un árbol de búsqueda binario \textbf{balanceado}. Dar su complejidad temporal.
 \end{Exercise}
 
+\chapter{Hashing}
 
+\begin{Exercise}
+	Diseñe un algoritmo que dado un arreglo arbitrario encuentre si hay y cuales son dos números que sumen un cierto K dado. La solución debe ser O(n) aún en el peor caso.
+\end{Exercise}
+
+\begin{Exercise}
+	Diseñe un algoritmo que determine si dos strings son isomorfas. Dos strings son isomorfas si existe un mapeo de caracteres que permita llevar de una a la otra. Por ejemplo: "abca" y agha" son isomorfas pero "abca" y aghh" no.
+\end{Exercise}
+
+\begin{Exercise}
+	Dado un arreglo arbitrario programe un algoritmo que encuentre un subarreglo contiguo que sume 0.
+\end{Exercise}
+
+\begin{Exercise}
+	Dados los elementos A, B, C y D y sus hashes:
+ 
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ & H1 & H2 & H3 & H4 \\ \hline
+A & 1379 & 1930 & 4110 & 5386 \\ \hline
+B & 3389 & 5796 & 577 & 1276 \\ \hline
+C & 6766 & 3819 & 4795 & 8783 \\ \hline
+D & 9318 & 692 & 2123 & 689 \\ \hline
+\end{tabular}
+\end{table}
+
+En un filtro de Bloom de tamaño 7 indique que pasa con el filtrop y que devuelven las siguientes operaciones luego de realizarlas:
+
+\Question Agregar el elemento A.
+\Question Consultar si A, B, C o D están.
+\Question Agregar el elemento B.
+\Question Consultar si A, B, C o D están.
+\Question Agregar el elemento C.
+\Question Consultar si A, B, C o D están.
+\Question Agregar el elemento D.
+\Question Consultar si A, B, C o D están.
+
+\end{Exercise}
+
+\begin{Exercise}Se hashearon 100 elementos y sus resultados fueron: \texttt{[3467, 3467, 7749, 4096, 4598, 575, 211, 2934, 416, 7353, 7749, 2508, 4271, 1256, 5141, 9889, 4271, 1591, 1352, 8244, 3077, 3782, 1591, 416, 4598, 7248, 1149, 6361, 5141, 416, 8915, 4560, 2072, 6361, 5469, 3755, 8981, 3467, 7749, 1149, 4271, 2997, 2282, 3997, 3975, 7486, 9854, 7656, 6259, 8244, 8981, 2508, 5796, 2282, 9854, 1256, 7749, 2282, 2282, 3467, 2545, 2072, 2934, 8915, 8244, 2234, 3997, 3092, 9860, 9748, 8244, 147, 8707, 3467, 3782, 7637, 3078, 366, 8707, 2997, 575, 2545, 3997, 1622, 2934, 3092, 1352, 7906, 4186, 4560, 4096, 7353, 7637, 9854, 4588, 5929, 1256, 2736, 1455, 8981]}. 
+ 
+ Indique usando su lenguaje de preferencia: según Flajolet-Martin cuantos elementos distintos resultaron de procesar los elementos uno a uno.
+\end{Exercise}
 
 \chapter{Grafos}
-
-\chapter{Hashing}
 
 \chapter{Respuestas}
 \shipoutAnswer
